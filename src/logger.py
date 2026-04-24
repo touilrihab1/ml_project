@@ -10,7 +10,7 @@ LOG_FILE_PATH= os.path.join(logs_path,LOG_FILE) #join has for parameters the dir
 
 logging.basicConfig(
     filename=LOG_FILE_PATH,
-    format="[%(asctime)s] %(lineno)d %(name)s - %(levelname)s - %(message)s",
+    format="[%(asctime)s] %(lineno)d %(name)s - %(levelname)s - %(message)s", # the format of the log messages. It includes the timestamp, line number, logger name, log level, and the actual log message.
     level=logging.INFO# the level of the log messages to be recorded. In this case, it is set to INFO, which means that all log messages with a severity level of INFO or higher (e.g., WARNING, ERROR, CRITICAL) will be recorded in the log file.
 )
 if __name__ == "__main__":

@@ -6,6 +6,8 @@ import pandas as pd
 from sklearn.model_selection import train_test_split 
 from dataclasses import dataclass
 
+from src.components.data_transformation import DataTransformation
+from src.components.data_transformation import DataTransformationConfig
 #this script is responsible for collecting data from different sources(APIs, databases, files))
 #bring raw data + convert it into usable format + prepape it for further processing or analysis
 @dataclass
@@ -30,9 +32,15 @@ class DataIngestion:
             train_set.to_csv(self.ingestion_config.train_data_path, index=False, header=True)
             test_set.to_csv(self.ingestion_config.test_data_path, index=False, header=True)
             logging.info("Data ingestion completed successfully")
+            return(
+                self.ingestion_config.train_data_path,
+                self.ingestion_config.test_data_path
+            )
         except Exception as e:
             raise CustomException(e, sys)
 
 if __name__ == "__main__":
     obj=DataIngestion()
-    obj.initiate_data_ingestion()
+    train_set, test_set = obj.initiate_data_ingestion()
+    transformation_obj=DataTransformation()
+    transformation_obj.initiate_data_transformation(train_set, test_set)
